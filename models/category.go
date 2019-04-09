@@ -1,6 +1,8 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+)
 
 type Category struct {
 	gorm.Model
@@ -10,3 +12,4 @@ type Category struct {
 	Slug        string `gorm:"size:50;unique"`
 	Description string
 }
+

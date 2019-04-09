@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/xusenlin/notes/database"
+	"github.com/xusenlin/notes/route"
+	"log"
 	"net/http"
 )
 
@@ -13,6 +15,9 @@ func main() {
 	}
 	defer database.Close()
 
-	http.ListenAndServe(":8088", http.FileServer(http.Dir("./public/")))
+	route.Run()
 
+	log.Println("Listening...")
+	http.ListenAndServe(":8088", nil)
 }
+
