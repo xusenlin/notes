@@ -1,14 +1,14 @@
 package route
 
 import (
-	"github.com/xusenlin/notes/controller"
+	"github.com/xusenlin/notes/controllers"
 	"net/http"
 )
 
 
 
 func Run()  {
-	http.HandleFunc("/api/category", controller.CategoryTree)
+	http.HandleFunc("/api/category", controllers.CategoryTree)
 
 
 
