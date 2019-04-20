@@ -7,5 +7,6 @@ type Notes struct {
 	Title      string
 	CategoryId uint
 	Order      uint
+	Color      string
 	Body       string `gorm:"type:TEXT"`
 }

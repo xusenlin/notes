@@ -1,22 +1,16 @@
 <template>
     <div class="notes">
-        <v-container grid-list-md text-xs-center fluid>
+        <v-container grid-list-md text-xs-center fluid style="margin-bottom: 100px">
             <v-layout row wrap>
-                <v-flex xs12 sm6 md4 lg3 v-for="i in 10">
+                <v-flex xs12 sm6 md4 lg3 v-for="i in 20" :key="i" style="padding: 14px">
                     <v-card
                         class="mx-auto"
                         color="#26c6da"
                         dark
-                        max-width="400"
                     >
                         <v-card-title>
-                            <v-icon
-                                large
-                                left
-                            >
-                                card_membership
-                            </v-icon>
-                            <span class="title font-weight-light">Twitter</span>
+                            <v-icon large left>text_fields</v-icon>
+                            <span class="title">这里是标题</span>
                         </v-card-title>
 
                         <v-card-text class="headline font-weight-bold">
@@ -25,27 +19,15 @@
 
                         <v-card-actions>
                             <v-list-tile class="grow">
-                                <v-list-tile-avatar color="grey darken-3">
-                                    <v-img
-                                        class="elevation-6"
-                                        src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                                    ></v-img>
-                                </v-list-tile-avatar>
 
+                                <v-icon class="mr-1">folder_open</v-icon>
                                 <v-list-tile-content>
                                     <v-list-tile-title>Evan You</v-list-tile-title>
                                 </v-list-tile-content>
 
-                                <v-layout
-                                    align-center
-                                    justify-end
-                                >
-                                    <v-icon class="mr-1">mdi-heart</v-icon>
-                                    <span class="subheading mr-2">256</span>
-                                    <span class="mr-1">·</span>
-                                    <v-icon class="mr-1">mdi-share-variant</v-icon>
-                                    <span class="subheading">45</span>
-                                </v-layout>
+                                <v-icon class="mr-1">edit</v-icon>
+
+                                <v-icon class="mr-1">delete</v-icon>
                             </v-list-tile>
                         </v-card-actions>
                     </v-card>
@@ -53,14 +35,14 @@
             </v-layout>
         </v-container>
 
-        <div class="pagination">
+        <div class="pagination" style="margin-bottom: 30px">
             <v-pagination
                 v-model="page"
                 :length="6"
                 circle
             ></v-pagination>
         </div>
-        <div class="edit-btn">
+        <div class="fab-btn">
             <v-fab-transition>
                 <v-btn color="primary" absolute bottom right fab>
                     <v-icon>edit</v-icon>
@@ -92,9 +74,6 @@
             width 100%
             bottom 10px
             position absolute
-        .edit-btn
-            position fixed
-            right 20px
-            bottom 100px
+
 
 </style>

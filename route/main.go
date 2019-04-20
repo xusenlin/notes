@@ -10,14 +10,14 @@ import (
 func InitRoute() *gin.Engine {
 	router := gin.Default()
 
+	//router.Use(middleware.CORS())
 
-	categoryGroup := router.Group("/api/category")
-	{
-		categoryGroup.GET("/", category.Index)
-		categoryGroup.GET("/", category.Show)
-		categoryGroup.GET("/", category.Destroy)
-		categoryGroup.POST("/", category.Store)
-	}
+
+	router.GET("/api/category/", category.Index)
+	router.GET("/api/category/show", category.Show)
+	router.GET("/api/category/destroy", category.Destroy)
+	router.POST("/api/category/store", category.Store)
+
 
 	router.StaticFile("/", "./public/dist/index.html")
 	router.StaticFile("/favicon.ico", "./public/dist/favicon.ico")

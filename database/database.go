@@ -3,7 +3,6 @@ package database
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/xusenlin/notes/models"
 )
 
 var DB *gorm.DB
@@ -15,7 +14,7 @@ func Open() error {
 		return err
 	}
 	// Migrate the schema
-	DB.AutoMigrate(&models.Category{},&models.Notes{})
+	//DB.AutoMigrate(&models.Category{},&models.Notes{})
 
 	return nil
 }

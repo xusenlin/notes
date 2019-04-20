@@ -1,170 +1,146 @@
 <template>
-  <div class="category">
-    <v-container fluid grid-list-md>
-      <v-data-iterator
-          :items="items"
-          :rows-per-page-items="rowsPerPageItems"
-          :pagination.sync="pagination"
-          content-tag="v-layout"
-          row
-          wrap
-      >
-        <template v-slot:item="props">
-          <v-flex
-              xs12
-              sm6
-              md4
-              lg3
-          >
+    <div class="category">
+        <v-container fluid grid-list-md>
+            <v-data-iterator
+                    :items="items"
+                    :rows-per-page-items="rowsPerPageItems"
+                    :pagination.sync="pagination"
+                    content-tag="v-layout"
+                    row
+                    wrap
+            >
+                <template v-slot:item="props">
+                    <v-flex
+                            xs12
+                            sm6
+                            md4
+                            lg3
+                    >
+                        <v-card>
+                            <v-card-title><h4>{{ props.item.Name }}</h4></v-card-title>
+                            <v-divider></v-divider>
+                            <v-list dense>
+                                <v-list-tile>
+                                    <v-list-tile-content>ID:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.ID }}
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>ParentId:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.ParentId }}</v-list-tile-content>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>Order:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.Order }}</v-list-tile-content>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>Slug:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.Slug }}
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>CreatedAt:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.CreatedAt }}
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                                <v-list-tile>
+                                    <v-list-tile-content>UpdatedAt:</v-list-tile-content>
+                                    <v-list-tile-content class="align-end">{{ props.item.UpdatedAt }}</v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+                        </v-card>
+                    </v-flex>
+                </template>
+            </v-data-iterator>
+        </v-container>
+        <div  class="fab-btn">
+            <v-fab-transition >
+                <v-btn @click="editCategory" color="primary" absolute bottom right fab>
+                    <v-icon>add</v-icon>
+                </v-btn>
+            </v-fab-transition>
+        </div>
+
+        <v-dialog v-model="edit.show" persistent max-width="600px">
             <v-card>
-              <v-card-title><h4>{{ props.item.name }}</h4></v-card-title>
-              <v-divider></v-divider>
-              <v-list dense>
-                <v-list-tile>
-                  <v-list-tile-content>Calories:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.calories }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>Fat:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.fat }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>Carbs:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.carbs }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>Protein:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.protein }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>Sodium:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.sodium }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>Calcium:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.calcium }}</v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>Iron:</v-list-tile-content>
-                  <v-list-tile-content class="align-end">{{ props.item.iron }}</v-list-tile-content>
-                </v-list-tile>
-              </v-list>
+                <v-card-title>
+                    <span class="headline">User Profile</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field label="Legal first name*" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field
+                                        label="Legal last name*"
+                                        hint="example of persistent helper text"
+                                        persistent-hint
+                                        required
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-text-field label="Email*" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-text-field label="Password*" type="password" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-select
+                                        :items="['0-17', '18-29', '30-54', '54+']"
+                                        label="Age*"
+                                        required
+                                ></v-select>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-autocomplete
+                                        :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
+                                        label="Interests"
+                                        multiple
+                                ></v-autocomplete>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                    <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click="edit.show = false">Close</v-btn>
+                    <v-btn color="blue darken-1" flat @click="edit.show = false">Save</v-btn>
+                </v-card-actions>
             </v-card>
-          </v-flex>
-        </template>
-      </v-data-iterator>
-    </v-container>
-  </div>
+        </v-dialog>
+
+    </div>
 </template>
 <script>
+    import {getAllList} from '../../api/category'
     export default {
         data: () => ({
             rowsPerPageItems: [4, 8, 12],
             pagination: {
                 rowsPerPage: 8
             },
-            items: [
-                {
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0,
-                    sodium: 87,
-                    calcium: '14%',
-                    iron: '1%'
-                },
-                {
-                    name: 'Ice cream sandwich',
-                    calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3,
-                    sodium: 129,
-                    calcium: '8%',
-                    iron: '1%'
-                },
-                {
-                    name: 'Eclair',
-                    calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0,
-                    sodium: 337,
-                    calcium: '6%',
-                    iron: '7%'
-                },
-                {
-                    name: 'Cupcake',
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3,
-                    sodium: 413,
-                    calcium: '3%',
-                    iron: '8%'
-                },
-                {
-                    name: 'Gingerbread',
-                    calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9,
-                    sodium: 327,
-                    calcium: '7%',
-                    iron: '16%'
-                },
-                {
-                    name: 'Jelly bean',
-                    calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0,
-                    sodium: 50,
-                    calcium: '0%',
-                    iron: '0%'
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0,
-                    sodium: 38,
-                    calcium: '0%',
-                    iron: '2%'
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5,
-                    sodium: 562,
-                    calcium: '0%',
-                    iron: '45%'
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9,
-                    sodium: 326,
-                    calcium: '2%',
-                    iron: '22%'
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7,
-                    sodium: 54,
-                    calcium: '12%',
-                    iron: '6%'
-                }
-            ]
-        })
+            items: [],
+            edit:{
+                show:false
+            }
+        }),
+        methods: {
+            editCategory(id=null){
+                this.edit.show = true
+            }
+        },
+        created() {
+            getAllList().then(r => {
+                this.items = r.data
+            }).catch(e => {
+                console.log(e)
+            })
+        },
     }
 </script>
